@@ -12,3 +12,55 @@
 .auth h2 {
   font-size: 20px;
 }
+
+.mainFooter {
+  background: white;
+  display: flex;
+  justify-content: space-around;
+}
+
+.dateCont {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+@keyframes blink-effect {
+  70% {
+    opacity: 0.8;
+  }
+}
+
+.today {
+  animation: blink-effect 1s step-end infinite;
+}
+.nextDay {
+  text-align: center;
+  margin: 11px;
+  position: relative;
+}
+.nextDay p {
+  margin: 0;
+  position: absolute;
+  top: -18%;
+}
+.date {
+  text-align: center;
+  position: absolute;
+  top: -11%;
+  left: 21%;
+  font-size: xx-large;
+}
+
+.dateWrapper {
+  margin: 11px;
+}
+.title {
+  font-size: 24px;
+  display: flex;
+  padding: 4px 0;
+  margin: 0 19px;
+  border-bottom: black 1px solid;
+}
+.goal {
+  margin: 10px 19px;
+}

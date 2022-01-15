@@ -7,9 +7,11 @@ import {
   getMainMsgApi,
   getMonthPresentApi,
 } from "../src/utils/api/mainApi";
+import classes from "./main.module.css";
 import moment from "moment";
-import MainMsgModal from "../src/components/mainMsgModal";
+import MainMsgModal from "../src/components/MainMsgModal";
 import MainPresentModal from "../src/components/MainPresentModal";
+import SendCheerModal from "../src/components/SendCheerModal";
 
 export default function Main() {
   const today = moment().format("D");
@@ -17,6 +19,7 @@ export default function Main() {
   console.log(today, "today");
   const [modalSwitch, setModalSwitch] = useState(false);
   const [modalSwitch2, setModalSwitch2] = useState(false);
+  const [modalSwitch3, setModalSwitch3] = useState(false);
   const isLogin = true;
   const [check, setCheck] = useState(false);
   const data = {
@@ -26,60 +29,120 @@ export default function Main() {
     days: {
       1: { msg: 3 },
       4: { msg: 7 },
+      19: { msg: 3 },
+      22: { msg: 7 },
     },
-    totalNum: 30,
+    doneDates: [1, 2, 5, 6, 7],
+    totalNum: 28,
   };
   const [copy, setCopy] = useState(false);
 
-  const { name, month, goal, days, totalNum } = data;
+  const { name, month, goal, days, totalNum, doneDates } = data;
   const onClickCheck = () => {
     setCheck(!check);
     console.log(check);
   };
   const onClickToday = async () => {
     console.log("click");
-    const res = await getMainMsgApi(today, userId);
-    console.log(res);
-    setModalSwitch(true);
+    // const res = await getMainMsgApi(today, userId);
+    // console.log(res);
+    if (isLogin) setModalSwitch(true);
+    console.log(isLogin);
   };
   const onClickPresent = async () => {
     console.log("click");
-    const res = await getMonthPresentApi(userId);
-    console.log(res);
+    // const res = await getMonthPresentApi(userId);
+    // console.log(res);
     setModalSwitch2(true);
   };
+  const onClickSend = async () => {
+    console.log("click");
+
+    setModalSwitch3(true);
+  };
   useEffect(() => {
-    const res = getMainInfoApi("aaa");
-    console.log(res);
+    // const res = getMainInfoApi("aaa");
+    // console.log(res);
   }, []);
 
   return (
     <>
-      <div>
-        {name} 님의 {month} 목표는
+      <img src={`light.png`} width="100%" style={{ marginTop: "37px" }} />
+      <div className={classes.title}>
+        {name} 님의 {month}월 목표
       </div>
-      <div>{goal}</div>
-      <div>
-        {range(0, totalNum).map((idx) => {
+      <div className={classes.goal}>{goal}</div>
+      <div className={classes.dateCont}>
+        {range(1, totalNum).map((idx) => {
           return Number.parseInt(today) > idx ? (
-            <div>pastday{idx}</div>
+            <div div key={idx}>
+              {" "}
+              {doneDates.includes(idx) ? (
+                <div
+                  className={classes.dateWrapper}
+                  style={{ position: "relative" }}
+                >
+                  <div>
+                    {" "}
+                    <img
+                      src={`./openDoors/${idx}.png`}
+                      width="40px"
+                      height="80px"
+                      style={{ opacity: 0.8 }}
+                    />
+                  </div>
+                  <div className={classes.date}>
+                    <p>{idx}</p>
+                  </div>{" "}
+                </div>
+              ) : (
+                <div
+                  className={classes.dateWrapper}
+                  style={{ position: "relative" }}
+                >
+                  <div>
+                    {" "}
+                    <img
+                      src={`./doors/${idx}.png`}
+                      width="40px"
+                      height="80px"
+                      style={{ opacity: 0.2 }}
+                    />
+                  </div>
+                  <div className={classes.date}>
+                    <p>{idx}</p>
+                  </div>
+                </div>
+              )}
+            </div>
           ) : Number.parseInt(today) === idx ? (
-            <div key={idx} onClick={() => onClickToday()}>
-              {idx}
-              {console.log(days[idx]?.msg)}
+            <div className={classes.dateWrapper} key={idx}>
+              {check ? (
+                <img
+                  className={classes.today}
+                  onClick={onClickToday}
+                  src={`./openDoors/${idx}.png`}
+                  width="40px"
+                  height="80px"
+                />
+              ) : (
+                <img src={`./doors/${idx}.png`} width="40px" height="80px" />
+              )}
+
               {days[idx]?.msg && <div>{days[idx]?.msg}</div>}
             </div>
           ) : (
-            <div key={idx}>
-              {idx}
-              {console.log(days[idx]?.msg)}
-              {days[idx]?.msg && <div>{days[idx]?.msg}</div>}
+            <div key={idx} className={classes.nextDay}>
+              {days[idx]?.msg && <p>{days[idx]?.msg}</p>}
+
+              <img src={`./doors/${idx}.png`} width="40px" height="80px" />
             </div>
           );
         })}
       </div>
+
       {isLogin ? (
-        <div>
+        <div className={classes.mainFooter}>
           <div onClick={onClickCheck}>{check ? "함" : "안함"}</div>
           <CopyToClipboard text={"copycopytest"} onCopy={() => setCopy(true)}>
             <button>공유</button>
@@ -87,12 +150,24 @@ export default function Main() {
           <div onClick={onClickPresent}>선물</div>
         </div>
       ) : (
-        <button>응원보내기</button>
+        <button onClick={onClickSend}>응원보내기</button>
       )}
-      {modalSwitch ? <MainMsgModal setModalSwitch={setModalSwitch} /> : null}
-      {modalSwitch2 ? (
-        <MainPresentModal setModalSwitch2={setModalSwitch2} />
-      ) : null}
+      {isLogin ? (
+        <>
+          {modalSwitch ? (
+            <MainMsgModal setModalSwitch={setModalSwitch} />
+          ) : null}
+          {modalSwitch2 ? (
+            <MainPresentModal setModalSwitch2={setModalSwitch2} />
+          ) : null}
+        </>
+      ) : (
+        <>
+          {modalSwitch3 ? (
+            <SendCheerModal setModalSwitch3={setModalSwitch3} />
+          ) : null}
+        </>
+      )}
     </>
   );
 }
