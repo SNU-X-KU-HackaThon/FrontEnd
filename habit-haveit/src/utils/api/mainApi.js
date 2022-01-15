@@ -19,3 +19,12 @@ export const getMainMsgApi = async (today, userid) => {
 
   return await axiosInstance.post(GET_MAIN_INFO, data);
 };
+
+export const getMonthPresentApi = async (userid) => {
+  const data = {
+    userid: "aaa",
+    today: "",
+  };
+
+  return await axiosInstance.post(GET_MAIN_INFO, data);
+};

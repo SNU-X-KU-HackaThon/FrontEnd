@@ -2,15 +2,21 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import range from "../src/utils/hooks/range";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { getMainInfoApi, getMainMsgApi } from "../src/utils/api/mainApi";
+import {
+  getMainInfoApi,
+  getMainMsgApi,
+  getMonthPresentApi,
+} from "../src/utils/api/mainApi";
 import moment from "moment";
 import MainMsgModal from "../src/components/mainMsgModal";
+import MainPresentModal from "../src/components/MainPresentModal";
 
 export default function Main() {
   const today = moment().format("D");
   const userId = "aaa";
   console.log(today, "today");
   const [modalSwitch, setModalSwitch] = useState(false);
+  const [modalSwitch2, setModalSwitch2] = useState(false);
   const isLogin = true;
   const [check, setCheck] = useState(false);
   const data = {
@@ -35,6 +41,12 @@ export default function Main() {
     const res = await getMainMsgApi(today, userId);
     console.log(res);
     setModalSwitch(true);
+  };
+  const onClickPresent = async () => {
+    console.log("click");
+    const res = await getMonthPresentApi(userId);
+    console.log(res);
+    setModalSwitch2(true);
   };
   useEffect(() => {
     const res = getMainInfoApi("aaa");
@@ -72,12 +84,15 @@ export default function Main() {
           <CopyToClipboard text={"copycopytest"} onCopy={() => setCopy(true)}>
             <button>공유</button>
           </CopyToClipboard>
-          <div>선물</div>
+          <div onClick={onClickPresent}>선물</div>
         </div>
       ) : (
         <button>응원보내기</button>
       )}
       {modalSwitch ? <MainMsgModal setModalSwitch={setModalSwitch} /> : null}
+      {modalSwitch2 ? (
+        <MainPresentModal setModalSwitch2={setModalSwitch2} />
+      ) : null}
     </>
   );
 }
