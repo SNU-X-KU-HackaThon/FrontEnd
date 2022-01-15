@@ -1,8 +1,8 @@
 import React from "react";
-import Button from "./Button";
+import Button from "../src/components/Button";
 import classes from "./auth.module.css";
 
-const auth = (props) => {
+const auth = () => {
   return (
     <div className={classes.auth}>
       <img src="./calendar.png" />
