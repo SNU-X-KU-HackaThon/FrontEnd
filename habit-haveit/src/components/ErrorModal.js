@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './ErrorModal.module.css'
+import Button from '../components/Button'
 
 const ErrorModal = (props) => {
     return (
@@ -13,7 +14,7 @@ const ErrorModal = (props) => {
                 <p>{props.message}</p>
             </div>
             <footer className={classes.actions}>
-                <button onClick={props.onConfirm}>확인</button>
+                <Button onClick={props.onConfirm}>확인</Button>
             </footer>
         </div>
         </div>
