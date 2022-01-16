@@ -1,7 +1,11 @@
 import Head from "next/head";
+import Router from "next/router";
 import * as S from "../styles/style";
 
 export default function Landing() {
+  setTimeout(() => {
+    Router.push("/auth");
+  }, 3000);
   return (
     <>
       <Head>
@@ -10,7 +14,7 @@ export default function Landing() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <S.Main>
-        <div>Landing Page</div>
+        <img src="../Landing.gif" />
       </S.Main>
     </>
   );

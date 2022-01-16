@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
     <RecoilRoot>
       <S.Container>
         <S.Phone>
-          <Component {...pageProps} />;
+          <Component {...pageProps} />
         </S.Phone>
       </S.Container>
     </RecoilRoot>

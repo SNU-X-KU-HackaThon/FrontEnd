@@ -1,28 +1,29 @@
 @font-face {
-  font-family: 'SBAggroB';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+  font-family: "SBAggroB";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'SANJUGotgam';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/SANJUGotgam.woff') format('woff');
+  font-family: "SANJUGotgam";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2112@1.0/SANJUGotgam.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
-.falseFooter{
+.falseFooter {
   display: flex;
   justify-content: center;
 }
 
-.falseFooter Button{
+.falseFooter Button {
   margin-top: 20px;
   border-radius: 100px;
-  width:180px;
-  height:50px;
+  width: 180px;
+  height: 50px;
   background: white;
-
 }
 .auth {
   margin: 20px;
@@ -67,18 +68,20 @@
 .today {
   animation: blink-effect 1s step-end infinite;
 }
-.nextDay {
-  text-align: center;
-  margin: 11px;
-  position: relative;
+.nextDay > img {
+  bottom: 0;
+  margin-top: 30px;
+  height: 70px;
+  width: 50px;
+  margin-left: 10px;
 }
 .nextDay p {
   margin: 0;
   position: absolute;
   top: -3%;
-  font-size:15px;
+  font-size: 15px;
   color: rgb(39, 158, 15);
-  font-family: 'SANJUGotgam';
+  font-family: "SANJUGotgam";
 }
 .date {
   text-align: center;
@@ -86,13 +89,11 @@
   top: -4%;
   left: 21%;
   font-size: 18px;
-
 }
-.date p
-{
-  color: #2C435D;
+.date p {
+  color: #2c435d;
   opacity: 60%;
-  font-family: 'SANJUGotgam';
+  font-family: "SANJUGotgam";
 }
 
 .dateWrapper {
@@ -103,7 +104,7 @@
   margin-left: 10px;
 }
 
-.dateWrapper img{
+.dateWrapper img {
   bottom: 0;
   height: 60px;
 }
@@ -115,14 +116,13 @@
   padding: 4px 0;
   margin-top: 10px;
   margin-left: 19px;
-  border-bottom: #4E3517 1px solid;
+  border-bottom: #4e3517 1px solid;
 }
 .goal {
   margin: 10px 19px;
 }
 
-.iGotMsg img
-{
+.iGotMsg img {
   margin-left: -30px;
   margin-top: -60px;
   opacity: 80%;

@@ -151,7 +151,7 @@ export default function Main() {
               {message_list[idx]?.msg && <div>{message_list[idx]?.msg}</div>}
             </div>
           ) : (
-            <div key={idx} className={classes.nextDay}>
+            <div key={idx} className={classes.dateWrapper}>
               {message_list[idx]?.msg && (
                 <div className={classes.iGotMsg}>
                   <img src={`../image 402.png`} width="25px" opacity="80%" />
