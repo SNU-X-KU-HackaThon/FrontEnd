@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import ErrorModal from "../src/components/ErrorModal";
 import classes from "./login.module.css";
 import Button from "../src/components/Button";
-import Router from "next/router"
-
-
+import Router from "next/router";
+import { loginApi } from "../src/utils/api";
 
 const login = () => {
   const [enteredUserid, setEnteredUserid] = useState("");
   const [enteredpassword, setEnteredpassword] = useState("");
   const [error, setError] = useState();
 
-  const LoginHandler = () => {
+  const LoginHandler = async (enteredUserid, enteredpassword) => {
+    //
+    console.log(enteredpassword, "hihi", enteredUserid);
     if (
       enteredUserid.trim().length === 0 ||
       enteredpassword.trim().length === 0
@@ -21,17 +22,10 @@ const login = () => {
         message: "아이디와 비밀번호를 입력해주세요.",
       });
       return;
-    }
-    if (
-      enteredUserid === null && enteredpassword === null
-    ) {
-      setError({
-        title: "Invalid input",
-        message: "아이디와 비밀번호를 입력해주세요.",
-      });
-    }
-    else {
-        Router.push("/main")
+    } else {
+      const res = await loginApi(enteredUserid, enteredpassword);
+      console.log(res.data);
+      Router.push("/main/" + res.data.userid);
     }
   };
   const useridChangehandler = (event) => {
