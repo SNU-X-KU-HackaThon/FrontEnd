@@ -1,1 +1,1 @@
-export { updateResourceApi, sendTxhash } from './imageApi'
+export { updateResourceApi, sendTxhash, getMainInfoApi } from "./imageApi";

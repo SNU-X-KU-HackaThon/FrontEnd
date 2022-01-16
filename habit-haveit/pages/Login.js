@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ErrorModal from "../src/components/ErrorModal";
 import classes from "./login.module.css";
 import Button from "../src/components/Button";
-import Link from "next/Link";
 import Router from "next/router"
 
 
@@ -14,12 +13,14 @@ const login = () => {
 
   const LoginHandler = () => {
     if (
-      enteredUserid === null && enteredpassword === null
+      enteredUserid.trim().length === 0 ||
+      enteredpassword.trim().length === 0
     ) {
       setError({
         title: "Invalid input",
         message: "아이디와 비밀번호를 입력해주세요.",
       });
+      return;
     }
     if (
       enteredUserid === null && enteredpassword === null
@@ -35,9 +36,9 @@ const login = () => {
   };
   const useridChangehandler = (event) => {
     // if (event.target.value === "id") {
-    setEnteredUserid(event.target.value)
-    console.log(event.target.value)
-  }
+    setEnteredUserid(event.target.value);
+    console.log(event.target.value);
+  };
   // } else {
   //   setError({
   //     title: "Invalid Input",
@@ -46,15 +47,10 @@ const login = () => {
   // }}
   //"id"나 "password"는 백앤드에서 가져와야되는거
   const passwordChangehandler = (event) => {
-    if (event.target.name === "password") {
-      setEnteredpassword(event.target.value)
-      console.log(enteredpassword)
-    } else {
-      setError({
-        title: "Invalid Input",
-        message: "비밀번호를 다시 입력하세요."
-      })
-  }}
+    setEnteredpassword(event.target.value);
+    console.log(enteredpassword);
+  };
+
   const errorHandler = () => {
     setError(null);
   };
@@ -68,7 +64,10 @@ const login = () => {
           onConfirm={errorHandler}
         />
       )}
-      <h2>  Habit, have it!과 함께 <br /> 나만의 어드벤트 캘린더를 만들어봐요!</h2>
+      <h2>
+        {" "}
+        Habit, have it!과 함께 <br /> 나만의 어드벤트 캘린더를 만들어봐요!
+      </h2>
       <form>
         <label htmlFor="id">아이디</label>
         <input
@@ -81,11 +80,13 @@ const login = () => {
         <input
           id="password"
           type="password"
-          name = "password"
+          name="password"
           onChange={passwordChangehandler}
           value={enteredpassword}
         />
-        <Button type="submit" onClick={LoginHandler}>로그인</Button>
+        <Button onClick={() => LoginHandler(enteredUserid, enteredpassword)}>
+          로그인
+        </Button>
       </form>
     </div>
   );
