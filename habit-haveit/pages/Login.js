@@ -3,6 +3,8 @@ import ErrorModal from "../src/components/ErrorModal";
 import classes from "./login.module.css";
 import Button from "../src/components/Button";
 import Link from "next/Link";
+import Router from "next/router"
+
 
 
 const login = () => {
@@ -11,8 +13,6 @@ const login = () => {
   const [error, setError] = useState();
 
   const LoginHandler = () => {
-    //
-    const sendToServer = 0;
     if (
       enteredUserid === null && enteredpassword === null
     ) {
@@ -29,8 +29,8 @@ const login = () => {
         message: "아이디와 비밀번호를 입력해주세요.",
       });
     }
-    if (sendToServer === 0) {
-      <Link href="./main" />
+    else {
+        Router.push("/main")
     }
   };
   const useridChangehandler = (event) => {
