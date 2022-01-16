@@ -84,7 +84,11 @@ export default function Main() {
 
   return (
     <>
-      <img src={`../light.png`} width="100%" style={{ marginTop: "37px" }} />
+      <img
+        src={`../light.png`}
+        width="380px"
+        style={{ marginTop: "30px", marginLeft: "0px", right: "0px" }}
+      />
       <div className={classes.title}>{name} 님의 2월 목표</div>
       <div className={classes.goal}>{goal}</div>
       <div className={classes.dateCont}>
@@ -148,7 +152,12 @@ export default function Main() {
             </div>
           ) : (
             <div key={idx} className={classes.nextDay}>
-              {message_list[idx]?.msg && <p>{message_list[idx]?.msg}</p>}
+              {message_list[idx]?.msg && (
+                <div className={classes.iGotMsg}>
+                  <img src={`../image 402.png`} width="25px" opacity="80%" />
+                  <p>{message_list[idx]?.msg}</p>
+                </div>
+              )}
 
               <img src={`../doors/${idx}.png`} width="40px" height="80px" />
             </div>
@@ -179,7 +188,9 @@ export default function Main() {
           </div>
         </div>
       ) : (
-        <Button onClick={onClickSend}>응원보내기</Button>
+        <Button className={classes.falseFooter} onClick={onClickSend}>
+          응원보내기
+        </Button>
       )}
 
       {modalSwitch ? <MainMsgModal setModalSwitch={setModalSwitch} /> : null}
