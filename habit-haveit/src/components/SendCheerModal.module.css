@@ -18,15 +18,7 @@
   background: white;
   border-radius: 10px;
 }
-.type {
-  display: flex;
-  width: -webkit-fill-available;
-  justify-content: space-around;
-}
-.type > p {
-  display: flex;
-  flex-direction: column;
-}
+
 .header {
   padding: 1rem;
 }
@@ -65,7 +57,4 @@
   width: 80%;
   height: 30px;
   margin-top: 10px;
-}
-.close {
-  margin-left: 253px;
 }

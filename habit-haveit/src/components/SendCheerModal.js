@@ -93,14 +93,7 @@ export default function SendCheerModal({ setModalSwitch3, userId }) {
     <div className={classes.backdrop}>
       <div className={classes.modal}>
         <div className={classes.content}>
-          {step === 5 && (
-            <div
-              className={classes.close}
-              onClick={() => setModalSwitch3(false)}
-            >
-              x
-            </div>
-          )}
+          {step === 5 && <div onClick={() => setModalSwitch3(false)}>x</div>}
           {step === 1 ? (
             <>
               <p>2월의 응원을 보내시는 분은 누구신가요?</p>
@@ -114,31 +107,9 @@ export default function SendCheerModal({ setModalSwitch3, userId }) {
           ) : step === 2 ? (
             <>
               <p>2월의 응원 종류를 골라주세요</p>
-              <div className={classes.type}>
-                <p onClick={() => onClick("LETTER")}>
-                  {sendType === "LETTER" ? (
-                    <img src="../Vectorletter.png" width="50px" />
-                  ) : (
-                    <img
-                      src="../Vectorletter.png"
-                      width="50px"
-                      style={{ opacity: 0.5 }}
-                    />
-                  )}
-                  편지
-                </p>
-                <p onClick={() => onClick("PRESENT")}>
-                  {sendType === "PRESENT" ? (
-                    <img src="../Vector.png" width="50px" />
-                  ) : (
-                    <img
-                      src="../Vector.png"
-                      width="50px"
-                      style={{ opacity: 0.5 }}
-                    />
-                  )}
-                  선물
-                </p>
+              <div>
+                <p onClick={() => onClick("LETTER")}>편지</p>
+                <p onClick={() => onClick("PRESENT")}>선물</p>
               </div>
             </>
           ) : step === 3 ? (
@@ -224,13 +195,7 @@ export default function SendCheerModal({ setModalSwitch3, userId }) {
               )
             }
           >
-            {step === 5
-              ? "나도 만들러 가기"
-              : step === 4
-              ? "편지 보내기"
-              : step === 3 && sendType === "PRESENT"
-              ? "선물 보내기"
-              : "다음"}
+            {step === 5 ? "나도 만들러 가기" : "다음"}
           </Button>
         </div>
       </div>
