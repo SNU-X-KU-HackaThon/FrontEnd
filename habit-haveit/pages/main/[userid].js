@@ -9,9 +9,13 @@ import MainMsgModal from "../../src/components/MainMsgModal";
 import MainPresentModal from "../../src/components/MainPresentModal";
 import SendCheerModal from "../../src/components/SendCheerModal";
 import { useRouter } from "next/router";
+import { useRecoilValue } from "recoil";
 import range from "../../src/utils/hooks/range";
 import { getMainInfoApi } from "../../src/utils/api";
 import MainShareModal from "../../src/components/MainShareModal";
+import { loginState } from "../../src/utils/recoil/states";
+import Button from "../../src/components/Button";
+import { completeApi } from "../../src/utils/api/sendApi";
 
 export default function Main() {
   const router = useRouter();
@@ -22,7 +26,7 @@ export default function Main() {
   const [modalSwitch2, setModalSwitch2] = useState(false);
   const [modalSwitch3, setModalSwitch3] = useState(false);
   const [modalSwitch4, setModalSwitch4] = useState(false);
-  const isLogin = true;
+  const isLogin = useRecoilValue(loginState);
   const [check, setCheck] = useState(false);
   const [data, setData] = useState({
     name: "가영",
@@ -40,7 +44,9 @@ export default function Main() {
   const [copy, setCopy] = useState(false);
 
   const { name, goal, message_list, total_date, complete_list } = data;
-  const onClickCheck = () => {
+  const onClickCheck = async () => {
+    const res = await completeApi(userId, today, goal);
+    console.log(res);
     setCheck(!check);
     console.log(check);
   };
@@ -151,7 +157,7 @@ export default function Main() {
         })}
       </div>
 
-      {isLogin ? (
+      {isLogin === userId ? (
         <div className={classes.mainFooter}>
           <div onClick={onClickCheck}>
             {check ? (
@@ -176,7 +182,7 @@ export default function Main() {
       ) : (
         <Button onClick={onClickSend}>응원보내기</Button>
       )}
-      {isLogin ? (
+      {isLogin === userId ? (
         <>
           {modalSwitch ? (
             <MainMsgModal setModalSwitch={setModalSwitch} />
@@ -191,7 +197,7 @@ export default function Main() {
       ) : (
         <>
           {modalSwitch3 ? (
-            <SendCheerModal setModalSwitch3={setModalSwitch3} />
+            <SendCheerModal setModalSwitch3={setModalSwitch3} userId={userId} />
           ) : null}
         </>
       )}

@@ -4,19 +4,11 @@ import ReactDom from "react-dom";
 import range from "../utils/hooks/range";
 import classes from "./MainMsgModal.module.css";
 import Router from "next/router";
+import { sendApi } from "../utils/api/sendApi";
 
-export default function SendCheerModal({ setModalSwitch3 }) {
+export default function SendCheerModal({ setModalSwitch3, userId }) {
   const [step, setStep] = useState(1);
   const today = moment().format("D");
-  const onClickNext = () => {
-    if (step === 5) {
-      setModalSwitch3(false);
-      Router.push("/auth");
-    }
-
-    if (step === 3 && sendType === "PRESENT") setStep(step + 2);
-    else setStep(step + 1);
-  };
   const [input, setInput] = useState({
     sender: "",
     sendType: "LETTER",
@@ -24,6 +16,41 @@ export default function SendCheerModal({ setModalSwitch3 }) {
     presentType: "카톡임티",
     letterContent: "",
   });
+  const onClickNext = async (
+    userId,
+    sender,
+    sendType,
+    letterContent,
+    letterDate,
+    presentType
+  ) => {
+    if (step === 5) {
+      console.log(
+        userId,
+        sender,
+        sendType,
+        letterContent,
+        letterDate,
+        presentType
+      );
+      const res = await sendApi(
+        sender,
+        userId,
+        sendType,
+        letterDate,
+        presentType,
+        letterContent
+      );
+
+      console.log(res);
+      setModalSwitch3(false);
+      Router.push("/auth");
+    }
+
+    if (step === 3 && sendType === "PRESENT") setStep(step + 2);
+    else setStep(step + 1);
+  };
+
   const { sender, sendType, letterContent, letterDate, presentType } = input;
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -129,7 +156,18 @@ export default function SendCheerModal({ setModalSwitch3 }) {
           </p>
         ) : null}
 
-        <button onClick={onClickNext}>
+        <button
+          onClick={() =>
+            onClickNext(
+              userId,
+              sender,
+              sendType,
+              letterContent,
+              letterDate,
+              presentType
+            )
+          }
+        >
           {step === 5 ? "나도 만들러 가기" : "다음"}
         </button>
       </div>

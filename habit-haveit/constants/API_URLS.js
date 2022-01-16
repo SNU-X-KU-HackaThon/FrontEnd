@@ -5,5 +5,7 @@ const API_URLS = {
   SIGNUP: "/accounts/signup/",
   LOGIN: "/accounts/login/",
   LOGOUT: "/accounts/logout/",
+  SEND: "/send/",
+  COMPLETE: "/complete/",
 };
 export default API_URLS;

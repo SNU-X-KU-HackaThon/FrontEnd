@@ -4,11 +4,14 @@ import classes from "./login.module.css";
 import Button from "../src/components/Button";
 import Router from "next/router";
 import { loginApi } from "../src/utils/api";
+import { useRecoilState } from "recoil";
+import { loginState } from "../src/utils/recoil/states";
 
 const login = () => {
   const [enteredUserid, setEnteredUserid] = useState("");
   const [enteredpassword, setEnteredpassword] = useState("");
   const [error, setError] = useState();
+  const [login, setLoginState] = useRecoilState(loginState);
 
   const LoginHandler = async (enteredUserid, enteredpassword) => {
     //
@@ -25,6 +28,7 @@ const login = () => {
     } else {
       const res = await loginApi(enteredUserid, enteredpassword);
       console.log(res.data);
+      setLoginState(res.data.userid);
       Router.push("/main/" + res.data.userid);
     }
   };

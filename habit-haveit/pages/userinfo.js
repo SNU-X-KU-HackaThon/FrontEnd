@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import ErrorModal from "../src/components/ErrorModal";
 import classes from "./signup.module.css";
 import Button from "../src/components/Button";
-import Link from "next/Link";
+import { useRecoilState } from "recoil";
 import Router, { useRouter } from "next/router";
 import { signupApi } from "../src/utils/api";
+import { loginState } from "../src/utils/recoil/states";
 
 const userinfo = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const userinfo = () => {
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredgoal, setEnteredgoal] = useState("");
   const [error, setError] = useState();
+  const [login, setLogin] = useRecoilState(loginState);
 
   const userinfoHandler = async (event, enteredUsername, enteredgoal) => {
     event.preventDefault();
@@ -35,6 +37,7 @@ const userinfo = () => {
       );
       console.log(res);
       const resUserId = res.data.userId;
+      setLogin(resUserId);
       //   const createUserInfo = await axios.post();
       Router.push("/main/" + resUserId);
     }
