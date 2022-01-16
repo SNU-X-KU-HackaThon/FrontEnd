@@ -15,7 +15,11 @@ import { getMainInfoApi } from "../../src/utils/api";
 import MainShareModal from "../../src/components/MainShareModal";
 import { loginState } from "../../src/utils/recoil/states";
 import Button from "../../src/components/Button";
-import { checkgiftApi, completeApi } from "../../src/utils/api/sendApi";
+import {
+  checkgiftApi,
+  checkletterApi,
+  completeApi,
+} from "../../src/utils/api/sendApi";
 
 export default function Main() {
   const router = useRouter();
@@ -28,6 +32,7 @@ export default function Main() {
   const [modalSwitch4, setModalSwitch4] = useState(false);
   const isLogin = useRecoilValue(loginState);
   const [check, setCheck] = useState(false);
+  const [msg, setMsg] = useState([]);
   const [data, setData] = useState({
     name: "가영",
     goal: "2월 잘살기",
@@ -52,8 +57,9 @@ export default function Main() {
   };
   const onClickToday = async () => {
     console.log("click");
-    // const res = await getMainMsgApi(today, userId);
-    // console.log(res);
+    const res = await checkletterApi(userId, today);
+    console.log(res);
+    setMsg(res.data.letter_list);
     if (isLogin) setModalSwitch(true);
     console.log(isLogin);
   };
@@ -193,7 +199,9 @@ export default function Main() {
         </Button>
       )}
 
-      {modalSwitch ? <MainMsgModal setModalSwitch={setModalSwitch} /> : null}
+      {modalSwitch ? (
+        <MainMsgModal setModalSwitch={setModalSwitch} msg={msg} />
+      ) : null}
       {modalSwitch2 ? (
         <MainPresentModal setModalSwitch2={setModalSwitch2} gift={gift} />
       ) : null}

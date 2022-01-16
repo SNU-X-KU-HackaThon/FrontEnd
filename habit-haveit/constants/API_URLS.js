@@ -8,5 +8,6 @@ const API_URLS = {
   SEND: "/send/",
   COMPLETE: "/complete/",
   CHECK_GIFT: "/checkgift/",
+  CHECK_LETTER: "/checkletter/",
 };
 export default API_URLS;

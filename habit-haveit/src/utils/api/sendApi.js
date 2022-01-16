@@ -1,7 +1,7 @@
 import { axiosInstance } from "./common";
 import { API_URLS } from "../../../constants";
 
-const { SEND, COMPLETE, CHECK_GIFT } = API_URLS;
+const { SEND, COMPLETE, CHECK_GIFT, CHECK_LETTER } = API_URLS;
 
 export const sendApi = async (
   sender,
@@ -47,4 +47,12 @@ export const checkgiftApi = async (userId) => {
     userid: userId,
   };
   return await axiosInstance.post(CHECK_GIFT, data);
+};
+
+export const checkletterApi = async (userId, date) => {
+  const data = {
+    userid: userId,
+    date: Number.parseInt(date),
+  };
+  return await axiosInstance.post(CHECK_LETTER, data);
 };
