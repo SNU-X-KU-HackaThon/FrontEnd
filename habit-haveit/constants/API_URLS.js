@@ -7,5 +7,6 @@ const API_URLS = {
   LOGOUT: "/accounts/logout/",
   SEND: "/send/",
   COMPLETE: "/complete/",
+  CHECK_GIFT: "/checkgift/",
 };
 export default API_URLS;

@@ -2,13 +2,14 @@ import moment from "moment";
 import React, { useState } from "react";
 import ReactDom from "react-dom";
 import range from "../utils/hooks/range";
-import classes from "./MainMsgModal.module.css";
+import classes from "./SendCheerModal.module.css";
 import Router from "next/router";
 import { sendApi } from "../utils/api/sendApi";
 
 export default function SendCheerModal({ setModalSwitch3, userId }) {
   const [step, setStep] = useState(1);
   const today = moment().format("D");
+  console.log(userId);
   const [input, setInput] = useState({
     sender: "",
     sendType: "LETTER",
@@ -24,7 +25,7 @@ export default function SendCheerModal({ setModalSwitch3, userId }) {
     letterDate,
     presentType
   ) => {
-    if (step === 5) {
+    if (step === 4) {
       console.log(
         userId,
         sender,
@@ -43,12 +44,33 @@ export default function SendCheerModal({ setModalSwitch3, userId }) {
       );
 
       console.log(res);
+    }
+    if (step === 5) {
       setModalSwitch3(false);
       Router.push("/auth");
     }
 
-    if (step === 3 && sendType === "PRESENT") setStep(step + 2);
-    else setStep(step + 1);
+    if (step === 3 && sendType === "PRESENT") {
+      console.log(
+        userId,
+        sender,
+        sendType,
+        letterContent,
+        letterDate,
+        presentType
+      );
+      const res = await sendApi(
+        sender,
+        userId,
+        sendType,
+        letterDate,
+        presentType,
+        letterContent
+      );
+
+      console.log(res);
+      setStep(step + 2);
+    } else setStep(step + 1);
   };
 
   const { sender, sendType, letterContent, letterDate, presentType } = input;
@@ -65,6 +87,7 @@ export default function SendCheerModal({ setModalSwitch3, userId }) {
     console.log(copy);
     setInput(copy);
   };
+
   return ReactDom.createPortal(
     <div className={classes.ModalBackground}>
       <div className={classes.ModalBox}>

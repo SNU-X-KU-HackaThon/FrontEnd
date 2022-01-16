@@ -1,7 +1,7 @@
 import { axiosInstance } from "./common";
 import { API_URLS } from "../../../constants";
 
-const { SEND, COMPLETE } = API_URLS;
+const { SEND, COMPLETE, CHECK_GIFT } = API_URLS;
 
 export const sendApi = async (
   sender,
@@ -40,4 +40,11 @@ export const completeApi = async (userId, today, goal) => {
     goal: goal,
   };
   return await axiosInstance.post(COMPLETE, data);
+};
+
+export const checkgiftApi = async (userId) => {
+  const data = {
+    userid: userId,
+  };
+  return await axiosInstance.post(CHECK_GIFT, data);
 };

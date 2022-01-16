@@ -15,7 +15,7 @@ import { getMainInfoApi } from "../../src/utils/api";
 import MainShareModal from "../../src/components/MainShareModal";
 import { loginState } from "../../src/utils/recoil/states";
 import Button from "../../src/components/Button";
-import { completeApi } from "../../src/utils/api/sendApi";
+import { checkgiftApi, completeApi } from "../../src/utils/api/sendApi";
 
 export default function Main() {
   const router = useRouter();
@@ -40,7 +40,7 @@ export default function Main() {
     complete_list: [1, 2, 5, 6, 7],
     total_date: 28,
   });
-
+  const [gift, setGift] = useState([]);
   const [copy, setCopy] = useState(false);
 
   const { name, goal, message_list, total_date, complete_list } = data;
@@ -59,13 +59,12 @@ export default function Main() {
   };
   const onClickPresent = async () => {
     console.log("click");
-    // const res = await getMonthPresentApi(userId);
-    // console.log(res);
+    const res = await checkgiftApi(userId);
+    setGift(res.data.gift_list);
     setModalSwitch2(true);
   };
   const onClickSend = async () => {
     console.log("click");
-
     setModalSwitch3(true);
   };
   const onClickShare = async () => {
@@ -182,25 +181,18 @@ export default function Main() {
       ) : (
         <Button onClick={onClickSend}>응원보내기</Button>
       )}
-      {isLogin === userId ? (
-        <>
-          {modalSwitch ? (
-            <MainMsgModal setModalSwitch={setModalSwitch} />
-          ) : null}
-          {modalSwitch2 ? (
-            <MainPresentModal setModalSwitch2={setModalSwitch2} />
-          ) : null}
-          {modalSwitch4 ? (
-            <MainShareModal setModalSwitch4={setModalSwitch4} />
-          ) : null}
-        </>
-      ) : (
-        <>
-          {modalSwitch3 ? (
-            <SendCheerModal setModalSwitch3={setModalSwitch3} userId={userId} />
-          ) : null}
-        </>
-      )}
+
+      {modalSwitch ? <MainMsgModal setModalSwitch={setModalSwitch} /> : null}
+      {modalSwitch2 ? (
+        <MainPresentModal setModalSwitch2={setModalSwitch2} gift={gift} />
+      ) : null}
+      {modalSwitch4 ? (
+        <MainShareModal setModalSwitch4={setModalSwitch4} />
+      ) : null}
+
+      {modalSwitch3 ? (
+        <SendCheerModal setModalSwitch3={setModalSwitch3} userId={userId} />
+      ) : null}
     </>
   );
 }
