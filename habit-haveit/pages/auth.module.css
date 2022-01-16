@@ -3,6 +3,9 @@
   margin-top: 100px;
   height: 80vh;
 }
+.buttons > h2 {
+  font-size: x-large;
+}
 .auth Button {
   margin-top: 40px;
   background: white;

@@ -194,9 +194,9 @@ export default function Main() {
           </div>
         </div>
       ) : (
-        <Button className={classes.falseFooter} onClick={onClickSend}>
-          응원보내기
-        </Button>
+        <div className={classes.falseFooter}>
+          <Button onClick={onClickSend}>응원 보내기</Button>
+        </div>
       )}
 
       {modalSwitch ? (

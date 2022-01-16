@@ -1,34 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Habit, have it!
 
-## Getting Started
+당신의 습관 멘토, **Habit, have it!**
+멋쟁이 사자처럼 서울대x고려대 9기 해커톤
 
-First, run the development server:
+## ✏️ 기획 의도
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+언제나 작심삼일에 그치고 하는 우리의 결심들. 그 결심을 친구들과 공유하고 서로에게 응원의 메시지를 보내며 응원한다면 가능하지 않을까요? 자신의 목표를 친구들과 나누고 서로에게 응원의 선물을 보내는 웹사이트를 만들고 싶었습니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✏️ 주요 기능
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+1. 자신의 목표를 설정하고 친구들과 공유하는 기능
+2. 목표를 달성한 기간을 한번에 살펴볼 수 있는 기능
+3. 친구의 목표에 응원의 메시지를 보낼 수 있는 기능.
+4. 친구의 목표에 선물을 보낼 수 있는 기능
+5. 목표를 달성한 뒤 친구에게 선물, 편지 독촉장을 보낼 수 있는 기능
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 🔥 개발 후기
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+권규리
 
-## Learn More
+> 박다연
+>
+> 박채원
+>
+> 엄성호
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 🙆‍♀️ 로컬에서 실행하기
