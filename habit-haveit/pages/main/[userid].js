@@ -1,21 +1,21 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import range from "../src/utils/hooks/range";
+
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import {
-  getMainInfoApi,
-  getMainMsgApi,
-  getMonthPresentApi,
-} from "../src/utils/api/mainApi";
-import classes from "./main.module.css";
+
+import classes from "../main.module.css";
 import moment from "moment";
-import MainMsgModal from "../src/components/MainMsgModal";
-import MainPresentModal from "../src/components/MainPresentModal";
-import SendCheerModal from "../src/components/SendCheerModal";
+import MainMsgModal from "../../src/components/MainMsgModal";
+import MainPresentModal from "../../src/components/MainPresentModal";
+import SendCheerModal from "../../src/components/SendCheerModal";
+import { useRouter } from "next/router";
+import range from "../../src/utils/hooks/range";
+import { getMainInfoApi } from "../../src/utils/api";
 
 export default function Main() {
+  const { query, reload } = useRouter();
+  const userId = String(query.userid);
   const today = moment().format("D");
-  const userId = "aaa";
   console.log(today, "today");
   const [modalSwitch, setModalSwitch] = useState(false);
   const [modalSwitch2, setModalSwitch2] = useState(false);
@@ -34,6 +34,7 @@ export default function Main() {
     complete_list: [1, 2, 5, 6, 7],
     total_date: 28,
   });
+
   const [copy, setCopy] = useState(false);
 
   const { name, goal, message_list, total_date, complete_list } = data;
@@ -60,7 +61,7 @@ export default function Main() {
     setModalSwitch3(true);
   };
   const getMainInfo = async () => {
-    const res = await getMainInfoApi("aaa");
+    const res = await getMainInfoApi(userId);
     setData(res.data);
     console.log(res.data);
   };
@@ -70,7 +71,7 @@ export default function Main() {
 
   return (
     <>
-      <img src={`light.png`} width="100%" style={{ marginTop: "37px" }} />
+      <img src={`../light.png`} width="100%" style={{ marginTop: "37px" }} />
       <div className={classes.title}>{name} 님의 2월 목표</div>
       <div className={classes.goal}>{goal}</div>
       <div className={classes.dateCont}>
@@ -86,7 +87,7 @@ export default function Main() {
                   <div>
                     {" "}
                     <img
-                      src={`./openDoors/${idx}.png`}
+                      src={`../openDoors/${idx}.png`}
                       width="40px"
                       height="80px"
                       style={{ opacity: 0.8 }}
@@ -104,7 +105,7 @@ export default function Main() {
                   <div>
                     {" "}
                     <img
-                      src={`./doors/${idx}.png`}
+                      src={`../doors/${idx}.png`}
                       width="40px"
                       height="80px"
                       style={{ opacity: 0.2 }}
@@ -122,12 +123,12 @@ export default function Main() {
                 <img
                   className={classes.today}
                   onClick={onClickToday}
-                  src={`./openDoors/${idx}.png`}
+                  src={`../openDoors/${idx}.png`}
                   width="40px"
                   height="80px"
                 />
               ) : (
-                <img src={`./doors/${idx}.png`} width="40px" height="80px" />
+                <img src={`../doors/${idx}.png`} width="40px" height="80px" />
               )}
 
               {message_list[idx]?.msg && <div>{message_list[idx]?.msg}</div>}
@@ -136,7 +137,7 @@ export default function Main() {
             <div key={idx} className={classes.nextDay}>
               {message_list[idx]?.msg && <p>{message_list[idx]?.msg}</p>}
 
-              <img src={`./doors/${idx}.png`} width="40px" height="80px" />
+              <img src={`../doors/${idx}.png`} width="40px" height="80px" />
             </div>
           );
         })}

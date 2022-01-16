@@ -3,13 +3,14 @@ import ErrorModal from "../src/components/ErrorModal";
 import classes from "./login.module.css";
 import Button from "../src/components/Button";
 import Router from "next/router";
+import { loginApi } from "../src/utils/api";
 
 const login = () => {
   const [enteredUserid, setEnteredUserid] = useState("");
   const [enteredpassword, setEnteredpassword] = useState("");
   const [error, setError] = useState();
 
-  const LoginHandler = (enteredUserid, enteredpassword) => {
+  const LoginHandler = async (enteredUserid, enteredpassword) => {
     //
     console.log(enteredpassword, "hihi", enteredUserid);
     if (
@@ -21,8 +22,11 @@ const login = () => {
         message: "아이디와 비밀번호를 입력해주세요.",
       });
       return;
+    } else {
+      const res = await loginApi(enteredUserid, enteredpassword);
+      console.log(res.data);
+      Router.push("/main/" + res.data.userid);
     }
-    Router.push("/main");
   };
   const useridChangehandler = (event) => {
     // if (event.target.value === "id") {
