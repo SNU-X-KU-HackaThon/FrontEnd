@@ -5,7 +5,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <S.Container>
       <S.Phone>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </S.Phone>
     </S.Container>
   );

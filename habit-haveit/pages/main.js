@@ -13,7 +13,7 @@ import MainMsgModal from "../src/components/MainMsgModal";
 import MainPresentModal from "../src/components/MainPresentModal";
 import MainShareModal from "../src/components/MainShareModal";
 import SendCheerModal from "../src/components/SendCheerModal";
-import Button from "../src/components/Button"
+import Button from "../src/components/Button";
 
 export default function Main() {
   const today = moment().format("D");
@@ -75,7 +75,7 @@ export default function Main() {
 
   return (
     <>
-      <img src={`light.png`} width="100%" style={{ marginTop: "37px" }} />
+      <img src={`light.png`} width="380px" style={{ marginTop: "30px", marginLeft:"0px",right: "0px"}} />
       <div className={classes.title}>
         {name} 님의 {month}월 목표
       </div>
@@ -141,7 +141,7 @@ export default function Main() {
             </div>
           ) : (
             <div key={idx} className={classes.nextDay}>
-              {days[idx]?.msg && <p>{days[idx]?.msg}</p>}
+              {days[idx]?.msg && <div className={classes.iGotMsg}><img src={`image 402.png`} width="25px" opacity="80%" /><p>{days[idx]?.msg}</p></div>}
 
               <img src={`./doors/${idx}.png`} width="40px" height="80px" />
             </div>
@@ -162,7 +162,9 @@ export default function Main() {
           <div onClick={onClickPresent}><img src="./vector.png" /></div>
         </div>
       ) : (
-        <Button onClick={onClickSend}>응원보내기</Button>
+        <div className={classes.falseFooter}>
+          <Button onClick={onClickSend}>응원 보내기</Button>
+        </div>
       )}
       {isLogin ? (
         <>
@@ -184,5 +186,5 @@ export default function Main() {
         </>
       )}
     </>
-  );
+  )
 }
