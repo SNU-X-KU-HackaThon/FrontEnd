@@ -2,8 +2,9 @@ import moment from "moment";
 import React, { useState } from "react";
 import ReactDom from "react-dom";
 import range from "../utils/hooks/range";
-import classes from "./MainMsgModal.module.css";
 import Router from "next/router";
+import Button from '../components/Button'
+import classes from './SendCheerModal.module.css'
 
 export default function SendCheerModal({ setModalSwitch3 }) {
   const [step, setStep] = useState(1);
@@ -39,8 +40,9 @@ export default function SendCheerModal({ setModalSwitch3 }) {
     setInput(copy);
   };
   return ReactDom.createPortal(
-    <div className={classes.ModalBackground}>
-      <div className={classes.ModalBox}>
+    <div className={classes.backdrop}>
+      <div className={classes.modal}>
+        <div className={classes.content}>
         {step === 5 && <div onClick={() => setModalSwitch3(false)}>x</div>}
         {step === 1 ? (
           <>
@@ -128,10 +130,13 @@ export default function SendCheerModal({ setModalSwitch3 }) {
             전송되었어요!{" "}
           </p>
         ) : null}
+        </div>
 
-        <button onClick={onClickNext}>
+        <div className={classes.actions}>  
+        <Button onClick={onClickNext}>
           {step === 5 ? "나도 만들러 가기" : "다음"}
-        </button>
+        </Button>
+        </div>
       </div>
     </div>,
     document.getElementById("modal-root")

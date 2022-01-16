@@ -23,7 +23,7 @@ export default function Main() {
   const [modalSwitch2, setModalSwitch2] = useState(false);
   const [modalSwitch3, setModalSwitch3] = useState(false);
   const [modalSwitch4, setModalSwitch4] = useState(false);
-  const isLogin = true;
+  const isLogin = false;
   const [check, setCheck] = useState(false);
   const data = {
     name: "가영",
