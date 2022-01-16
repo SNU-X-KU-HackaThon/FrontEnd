@@ -13,8 +13,8 @@ import range from "../../src/utils/hooks/range";
 import { getMainInfoApi } from "../../src/utils/api";
 
 export default function Main() {
-  const { query, reload } = useRouter();
-  const userId = String(query.userid);
+  const router = useRouter();
+  const userId = String(router.query.userid);
   const today = moment().format("D");
   console.log(today, "today");
   const [modalSwitch, setModalSwitch] = useState(false);
@@ -60,14 +60,15 @@ export default function Main() {
 
     setModalSwitch3(true);
   };
-  const getMainInfo = async () => {
+  const getMainInfo = async (userId) => {
     const res = await getMainInfoApi(userId);
     setData(res.data);
     console.log(res.data);
   };
   useEffect(() => {
-    getMainInfo();
-  }, []);
+    if (!router.isReady) return;
+    getMainInfo(userId);
+  }, [router.isReady]);
 
   return (
     <>

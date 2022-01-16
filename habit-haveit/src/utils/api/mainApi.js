@@ -5,7 +5,7 @@ const { GET_MAIN_INFO } = API_URLS;
 
 export const getMainInfoApi = async (userId) => {
   const data = {
-    userid: "aaa",
+    userid: userId,
   };
   console.log(userId);
   return await axiosInstance.post(GET_MAIN_INFO, data);
