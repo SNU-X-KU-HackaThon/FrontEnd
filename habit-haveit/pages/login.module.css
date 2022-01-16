@@ -6,11 +6,11 @@
 .input label {
   display: block;
   font-weight: bold;
-  font-size:25px;
+  font-size: 25px;
   margin-bottom: 30px;
-  margin-top:40px;
-  color:#4E3517;
-  font-family:jua;
+  margin-top: 40px;
+  color: #4e3517;
+  font-family: jua;
 }
 
 .input input {
@@ -25,10 +25,10 @@
 
 .input input:focus {
   outline: none;
-  border-color: #BEE7D7;
+  border-color: #bee7d7;
 }
 
-.input form{
+.input form {
   background-color: white;
   border-radius: 70px 70px 0px 0px;
   height: 610px;
@@ -36,13 +36,13 @@
   justify-content: center;
 }
 
-.input Button{
-  margin-top: 30px;
-  margin-left:50px;
+.input Button {
+  margin-top: 50px;
+  margin-left: 50px;
   border-radius: 100px;
-  width:200px;
-  height:60px;
+  width: 200px;
+  height: 60px;
 }
-.input h2{
+.input h2 {
   padding: 30px;
 }

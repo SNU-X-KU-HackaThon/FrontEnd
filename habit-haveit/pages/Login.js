@@ -1,52 +1,75 @@
 import React, { useState } from "react";
-import ErrorModal from './ErrorModal'
-import classes from './login.module.css'
-import Button from './Button'
+import ErrorModal from "../src/components/ErrorModal";
+import classes from "./login.module.css";
+import Button from "../src/components/Button";
+import Link from "next/Link";
 
-const login = (props) => {
+
+const login = () => {
   const [enteredUserid, setEnteredUserid] = useState("");
   const [enteredpassword, setEnteredpassword] = useState("");
-  const [enteredpasswordcheck, setEnteredpasswordcheck] = useState("");
-  const [error,setError] = useState();
+  const [error, setError] = useState();
 
-  const addUserHandler = (event) => {
-    event.preventDefault();
-
-    if (enteredUserid.trim().length === 0 || enteredpassword.trim().length === 0){
-        setError({
-            title: 'Invalid input',
-            message: '아이디와 비밀번호를 입력해주세요.'
-        })
+  const LoginHandler = () => {
+    //
+    const sendToServer = 0;
+    if (
+      enteredUserid === null && enteredpassword === null
+    ) {
+      setError({
+        title: "Invalid input",
+        message: "아이디와 비밀번호를 입력해주세요.",
+      });
     }
-    if (enteredpassword != enteredpasswordcheck) {
-        setError({
-            title: 'Invalid password',
-            message: '비밀번호를 맞게 입력했는지 확인해주세요.'
-        })
+    if (
+      enteredUserid === null && enteredpassword === null
+    ) {
+      setError({
+        title: "Invalid input",
+        message: "아이디와 비밀번호를 입력해주세요.",
+      });
     }
-    props.onAddUser(enteredUserid, enteredpassword, enteredpasswordcheck);
-    setEnteredUserid("");
-    setEnteredpassword("");
-    setEnteredpasswordcheck("");
+    if (sendToServer === 0) {
+      <Link href="./main" />
+    }
   };
   const useridChangehandler = (event) => {
-    setEnteredUserid(event.target.value);
-  };
+    // if (event.target.value === "id") {
+    setEnteredUserid(event.target.value)
+    console.log(event.target.value)
+  }
+  // } else {
+  //   setError({
+  //     title: "Invalid Input",
+  //     message: "아이디를 다시 입력하세요."
+  //   })
+  // }}
+  //"id"나 "password"는 백앤드에서 가져와야되는거
   const passwordChangehandler = (event) => {
-    setEnteredpassword(event.target.value);
-  };
-  const passwordcheckChangehandler = (event) => {
-    setEnteredpasswordcheck(event.target.value);
-  };
+    if (event.target.name === "password") {
+      setEnteredpassword(event.target.value)
+      console.log(enteredpassword)
+    } else {
+      setError({
+        title: "Invalid Input",
+        message: "비밀번호를 다시 입력하세요."
+      })
+  }}
   const errorHandler = () => {
     setError(null);
-
-}
+  };
 
   return (
     <div className={classes.input}>
-        {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}
-      <form onSubmit={addUserHandler}>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
+      <h2>  Habit, have it!과 함께 <br /> 나만의 어드벤트 캘린더를 만들어봐요!</h2>
+      <form>
         <label htmlFor="id">아이디</label>
         <input
           id="id"
@@ -58,20 +81,14 @@ const login = (props) => {
         <input
           id="password"
           type="password"
+          name = "password"
           onChange={passwordChangehandler}
           value={enteredpassword}
         />
-        <label htmlFor="passwordcheck">비밀번호 확인</label>
-        <input
-          id="passwordcheck"
-          type="password"
-          onChange={passwordcheckChangehandler}
-          value={enteredpasswordcheck}
-        />
-        <Button type="submit">생성하기</Button>
+        <Button type="submit" onClick={LoginHandler}>로그인</Button>
       </form>
     </div>
   );
 };
 
-export default signup;
+export default login;

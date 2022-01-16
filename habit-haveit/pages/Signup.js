@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import ErrorModal from "./ErrorModal";
-import classes from "./Signup.module.css";
-import Button from "./Button";
+import ErrorModal from "../src/components/ErrorModal";
+import classes from "./signup.module.css";
+import Button from "../src/components/Button";
+import Router from "next/router"
+
 
 const signup = () => {
   const [enteredUserid, setEnteredUserid] = useState("");
@@ -9,29 +11,31 @@ const signup = () => {
   const [enteredpasswordcheck, setEnteredpasswordcheck] = useState("");
   const [error, setError] = useState();
 
-  const addUserHandler = (event) => {
+  const addUserHandler = (event,enteredUserid,enteredpassword, enteredpasswordcheck) => {
     event.preventDefault();
 
     if (
       enteredUserid.trim().length === 0 ||
-      enteredpassword.trim().length === 0
+      enteredpassword.trim().length === 0 ||
+      enteredpasswordcheck.trim().length === 0
     ) {
       setError({
         title: "Invalid input",
-        message: "아이디와 비밀번호를 입력해주세요.",
+        message: "빈칸을 모두 입력해주세요.",
       });
+      return
     }
     if (enteredpassword != enteredpasswordcheck) {
       setError({
         title: "Invalid password",
         message: "비밀번호를 맞게 입력했는지 확인해주세요.",
       });
+      return
     }
+    Router.push("/userinfo")
     // props.onAddUser(enteredUserid, enteredpassword, enteredpasswordcheck);
     console.log(enteredUserid, enteredpassword, enteredpasswordcheck);
-    setEnteredUserid("");
-    setEnteredpassword("");
-    setEnteredpasswordcheck("");
+    
   };
   const useridChangehandler = (event) => {
     setEnteredUserid(event.target.value);
@@ -55,7 +59,8 @@ const signup = () => {
           onConfirm={errorHandler}
         />
       )}
-      <form onSubmit={addUserHandler}>
+      <h2>  Habit, have it!과 함께 <br /> 나만의 어드벤트 캘린더를 만들어봐요!</h2>
+      <form onSubmit={(e) => addUserHandler(e,enteredUserid,enteredpassword,enteredpasswordcheck)}>
         <label htmlFor="id">아이디</label>
         <input
           id="id"
