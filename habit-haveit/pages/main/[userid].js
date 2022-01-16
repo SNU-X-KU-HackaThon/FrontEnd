@@ -11,6 +11,7 @@ import SendCheerModal from "../../src/components/SendCheerModal";
 import { useRouter } from "next/router";
 import range from "../../src/utils/hooks/range";
 import { getMainInfoApi } from "../../src/utils/api";
+import MainShareModal from "../../src/components/MainShareModal";
 
 export default function Main() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function Main() {
   const [modalSwitch, setModalSwitch] = useState(false);
   const [modalSwitch2, setModalSwitch2] = useState(false);
   const [modalSwitch3, setModalSwitch3] = useState(false);
+  const [modalSwitch4, setModalSwitch4] = useState(false);
   const isLogin = true;
   const [check, setCheck] = useState(false);
   const [data, setData] = useState({
@@ -59,6 +61,11 @@ export default function Main() {
     console.log("click");
 
     setModalSwitch3(true);
+  };
+  const onClickShare = async () => {
+    console.log("click");
+
+    setModalSwitch4(true);
   };
   const getMainInfo = async (userId) => {
     const res = await getMainInfoApi(userId);
@@ -146,14 +153,28 @@ export default function Main() {
 
       {isLogin ? (
         <div className={classes.mainFooter}>
-          <div onClick={onClickCheck}>{check ? "함" : "안함"}</div>
-          <CopyToClipboard text={"copycopytest"} onCopy={() => setCopy(true)}>
-            <button>공유</button>
+          <div onClick={onClickCheck}>
+            {check ? (
+              <img src="../checkboxs.png" />
+            ) : (
+              <img src="../empty.png" />
+            )}
+          </div>
+          <CopyToClipboard
+            text={"http://localhost:3000/main/" + userId}
+            onCopy={() => setCopy(true)}
+          >
+            <div onClick={onClickShare}>
+              {" "}
+              <img src="../group.png" />
+            </div>
           </CopyToClipboard>
-          <div onClick={onClickPresent}>선물</div>
+          <div onClick={onClickPresent}>
+            <img src="../vector.png" />
+          </div>
         </div>
       ) : (
-        <button onClick={onClickSend}>응원보내기</button>
+        <Button onClick={onClickSend}>응원보내기</Button>
       )}
       {isLogin ? (
         <>
@@ -162,6 +183,9 @@ export default function Main() {
           ) : null}
           {modalSwitch2 ? (
             <MainPresentModal setModalSwitch2={setModalSwitch2} />
+          ) : null}
+          {modalSwitch4 ? (
+            <MainShareModal setModalSwitch4={setModalSwitch4} />
           ) : null}
         </>
       ) : (
