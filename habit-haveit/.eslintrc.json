@@ -4,5 +4,6 @@
     // Other rules
     "@next/next/no-img-element": "off",
     "ignoreDuringBuilds": true
-  }
+  },
+  "ignorePatterns": ["node_modules/*", ".next/*"]
 }
