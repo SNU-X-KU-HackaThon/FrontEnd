@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ErrorModal from "../src/components/ErrorModal";
-import classes from "./signup.module.css";
+import classes from "signup.module.css";
 import Button from "../src/components/Button";
 import { useRecoilState } from "recoil";
 import Router, { useRouter } from "next/router";
