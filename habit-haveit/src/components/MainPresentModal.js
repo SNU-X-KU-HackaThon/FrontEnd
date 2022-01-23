@@ -20,7 +20,7 @@ export default function MainPresentModal({ setModalSwitch2, gift }) {
               ) : (
                 <>
                   {gift.map((one) => (
-                    <li>
+                    <li key={one[1] + one[0]}>
                       {one[1]} from {one[0]}
                     </li>
                   ))}
