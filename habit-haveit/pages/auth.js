@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../src/components/Button";
 import classes from "./auth.module.css";
-import Link from "next/Link";
+import NextLink from "next/Link";
 
 const auth = () => {
   return (
@@ -10,12 +10,12 @@ const auth = () => {
 
       <div className={classes.buttons}>
         <h2>Habit, Have it!</h2>
-        <Link href="./login">
+        <NextLink href="./login">
           <Button>이미 목표가 있어요!</Button>
-        </Link>
-        <Link href="./signup">
+        </NextLink>
+        <NextLink href="./signup">
           <Button>처음이에요!</Button>
-        </Link>
+        </NextLink>
       </div>
     </div>
   );
