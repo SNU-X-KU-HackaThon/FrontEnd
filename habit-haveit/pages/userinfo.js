@@ -7,7 +7,7 @@ import Router, { useRouter } from "next/router";
 import { signupApi } from "../src/utils/api";
 import { loginState } from "../src/utils/recoil/states";
 
-const userinfo = () => {
+const Userinfo = () => {
   const router = useRouter();
 
   const userid = router.query.userid;
@@ -92,4 +92,4 @@ const userinfo = () => {
   );
 };
 
-export default userinfo;
+export default Userinfo;

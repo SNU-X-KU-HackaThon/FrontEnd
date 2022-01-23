@@ -4,7 +4,7 @@ import classes from "./signup.module.css";
 import Button from "../src/components/Button";
 import Router from "next/router";
 
-const signup = () => {
+const Signup = () => {
   const [enteredUserid, setEnteredUserid] = useState("");
   const [enteredpassword, setEnteredpassword] = useState("");
   const [enteredpasswordcheck, setEnteredpasswordcheck] = useState("");
@@ -107,4 +107,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;

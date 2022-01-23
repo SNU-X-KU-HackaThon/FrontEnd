@@ -7,7 +7,7 @@ import { loginApi } from "../src/utils/api";
 import { useRecoilState } from "recoil";
 import { loginState } from "../src/utils/recoil/states";
 
-const login = () => {
+const Login = () => {
   const [enteredUserid, setEnteredUserid] = useState("");
   const [enteredpassword, setEnteredpassword] = useState("");
   const [error, setError] = useState();
@@ -90,4 +90,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
