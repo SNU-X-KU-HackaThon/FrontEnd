@@ -11,7 +11,7 @@ const login = () => {
   const [enteredUserid, setEnteredUserid] = useState("");
   const [enteredpassword, setEnteredpassword] = useState("");
   const [error, setError] = useState();
-  const [login, setLoginState] = useRecoilState(loginState);
+  const [, setLoginState] = useRecoilState(loginState);
 
   const LoginHandler = async (enteredUserid, enteredpassword) => {
     //

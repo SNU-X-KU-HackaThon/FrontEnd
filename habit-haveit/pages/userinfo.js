@@ -15,7 +15,7 @@ const userinfo = () => {
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredgoal, setEnteredgoal] = useState("");
   const [error, setError] = useState();
-  const [login, setLogin] = useRecoilState(loginState);
+  const [, setLogin] = useRecoilState(loginState);
 
   const userinfoHandler = async (event, enteredUsername, enteredgoal) => {
     event.preventDefault();
